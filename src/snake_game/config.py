@@ -5,7 +5,7 @@ map_size = (10, 10)
 class MapTooSmallError(Exception):
      pass
 
-def create_map():
+def modify_size_map():
 
     creation_valid = True
     while creation_valid:
