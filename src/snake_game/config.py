@@ -6,8 +6,8 @@ class MapTooSmallError(Exception):
      pass
 
 def modify_size_map():
-
     creation_valid = True
+
     while creation_valid:
         try:
             n = int(input("Ingresa una cantidad mayor a 3 filas para el mapa: "))
