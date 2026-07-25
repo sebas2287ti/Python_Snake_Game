@@ -1,6 +1,6 @@
 import os
 
-map_size = (10, 10)
+map_size = [10, 10]
 
 class MapTooSmallError(Exception):
      pass
@@ -27,10 +27,8 @@ def modify_size_map():
         else:
             creation_valid = False
             global map_size 
-            map_size = (n, m)
+            map_size[:] = n,m 
 
         finally:
             os.system("cls")
-
-    return map_size
         

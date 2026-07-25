@@ -5,16 +5,18 @@ map_game = []
 
 def create_map():
     n, m = map_size
-    map_game = []
+    map_create_game = []
 
     for x in range(n):
         fila = []
         for y in range(m):
             fila.append(0)
-        map_game.append(fila)
-    return map_game
+        map_create_game.append(fila)
+    global map_game
+    map_game[:] = map_create_game
 
-def print_map(map_game):
+
+def print_map():
     os.system("cls")
 
     for x in map_game:
