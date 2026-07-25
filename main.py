@@ -1,5 +1,5 @@
-import src.snake_game.game as Game
-import src.snake_game.config as ConfigGame
+import snake_game.game as Game
+import snake_game.config as ConfigGame
 
 def main():
     ConfigGame.create_map()

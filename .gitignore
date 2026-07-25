@@ -1,4 +1,18 @@
 # created by virtualenv automatically
+
+#Entornos virtuales
 /.env
 env
+
+#Python Cache
+__pycache__/
+*.pyc
+
+#Vscode Config
 .vscode
+
+#MetaDatos
+*.egg-info/
+.eggs/
+build/
+dist/
