@@ -1,6 +1,5 @@
+from snake_game.state import change_map_size
 import os
-
-map_size = [10, 10]
 
 class MapTooSmallError(Exception):
      pass
@@ -26,8 +25,7 @@ def modify_size_map():
 
         else:
             creation_valid = False
-            global map_size 
-            map_size[:] = n,m 
+            change_map_size(n, m)
 
         finally:
             os.system("cls")
