@@ -1,47 +1,42 @@
-from snake_game.utils import dict_direction as direction_snake
-from snake_game.config import map_size
-from snake_game.game import map_game, fruits_eats, snake_data
+from snake_game.state import dict_direction as direction_snake, map_size, map_game, execute_movent_snake, change_data_snake_temporaly, change_eat_fruits, snake_data, snake_data_temporaly
 
-def check_run_snake_collision(y_snake, x_snake, movent):
-    y_movent, x_movent = direction_snake[movent]
-    y_next, x_next = y_snake + y_movent, x_snake + x_movent
-    map_columnas,map_filas = map_size
+def check_run_snake_collision():
+    snake_y, snake_x, snake_direction = snake_data_temporaly
 
-    if y_next >= 0 and y_next < map_filas and x_next >= 0 and x_next < map_columnas:
-        if  map_game[y_next][x_next] == 0:
+    map_size_n, map_size_m = map_size
+
+    if snake_y >= 0 and snake_y < map_size_n and snake_x >= 0 and snake_x < map_size_m:
+        if map_game[snake_y][snake_x] == 0:
+            execute_movent_snake()
             return False
-        elif map_game[y_next][x_next] == "f":
-            fruits_eats()
+        elif map_game[snake_y][snake_x] == "m":
+            execute_movent_snake()
+            change_eat_fruits()
             return False
         else:
             return True
-    else:
-        return True
+    return True
 
-def movent_snake():
-    global snake_data
-    y, x, direction = snake_data 
-    movent_y, movent_x = direction_snake[direction]
+
+def next_movent_snake():
+    snake_y, snake_x, snake_direction_old = snake_data
+    new_snake_data = []
 
     try:
-        tecla = obtener_tecla().lower()
-        if tecla in direction_snake:
+        new_direction = obtener_tecla().lower()
+        if new_direction in direction_snake:
             pass
         else:
             raise ValueError("Movimiento no valido")
-    except: 
-        new_y, new_x = y + movent_y, x + movent_x
-        snake_data = (new_y,new_x,direction)
+    except:
+        snake_direction_x, snake_direction_y = direction_snake[snake_direction_old] 
+        new_snake_data[:] = snake_y + snake_direction_y, snake_x + snake_direction_x, snake_direction_old
     else:
-        movent_y, movent_x = direction_snake[tecla]
-        new_y, new_x = y + movent_y, x + movent_x
-        snake_data = (new_y, new_x, tecla)
-    print(snake_data)
-    return snake_data 
-        
+        snake_direction_x, snake_direction_y = direction_snake[new_direction]
+        new_snake_data[:] = snake_y + snake_direction_y, snake_x + snake_direction_x, new_direction
+    finally:
+        change_data_snake_temporaly(new_snake_data)
 
 def obtener_tecla():
-    return input("movimiento: ")
+    return input("siguiente movimiento: ")
 
-
-movent_snake()
