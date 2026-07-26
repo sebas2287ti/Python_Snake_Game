@@ -11,7 +11,8 @@ def create_map():
             fila.append(0)
         map_create_game.append(fila)
 
-    y,x,direction = snake_data
+    snake_data_start = snake_data[0]
+    y,x,direction = snake_data_start
     map_create_game[y][x] = direction
     
     change_map_game(map_create_game)
@@ -22,7 +23,10 @@ def print_map():
     for x in map_game:
         print("| ", end="")
         for y in x:
-            print(y, " ", end="")
+            if y == 0:
+                print(y, " ", end="")
+            else:
+                print(y, " ", end="")
         print("|")
 
 
